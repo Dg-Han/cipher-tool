@@ -1,0 +1,23 @@
+h1,p{
+    text-align:center;
+}
+.navi{
+    margin-left:5%;
+    margin-top:50px;
+    width:max(10%,80px);
+    height:640px;
+    float:left;
+    background-color: lightgray;
+}
+.navi-item{
+    text-align:center;
+    padding:10px;
+}
+.navi-item:hover{
+    background-color: aliceblue;
+}
+.content{
+    width:75%;
+    margin-right:5%;
+    float:right;
+}

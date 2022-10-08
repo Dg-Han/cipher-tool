@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="./style/style.css">
+
+        <script src="https://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="./script/calc.js"></script>
+        <script type="text/javascript" src="./script/count.js"></script>
+        <script type="text/javascript" src="./script/ui.js"></script>
+        <script type="text/javascript" src="./script/hotkey.js"></script>
+    </head>
+    <body>
+        <div class="navi">
+            <div class="navi-item" onclick="show_calc()">单词分数计算</div>
+            <div class="navi-item" onclick="show_count()">单表字频统计</div>
+        </div>
+        <div id="calc" class="content" style="display:none">
+            <h1>单词分数计算器</h1>
+            <p style="color:grey;font-size:smaller">Scarmble分数为Wordle字母分数<br>
+                字母序数分数为字母序数和(a=1)
+            </p>
+            <div align="center" style="margin:width-25px">
+                <input id="calc_input" type="text">
+                <button type="button" onclick="calc()">计算</button>
+            </div>
+            <p class="result"></p>
+        </div>
+        <div id="count" class="content" style="display:none">
+            <h1>单表字频统计</h1>
+            <div align="center">
+                <div style="width:100%"><input id="count_input" type="text" style="width:50%;height:300px"></div>
+                <label><input name="ign_cap" type="checkbox">仅统计英文且忽略大小写</label>
+                <label><input name="twochar" type="checkbox">统计双字母组合</label>
+                <button type="button" onclick="count()">统计</button>
+            </div>
+            <p class="result"></p>
+        </div>
+    </body>
+</html>
