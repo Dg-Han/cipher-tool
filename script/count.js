@@ -38,3 +38,25 @@ function count(){
     }
     $(".result").html(h);
 }
+
+function subst(){
+    var check=[];
+    for (i = 0; i < 26; i++){
+        chr = String.fromCharCode(97+i);
+        to = $(`#${chr}`).val();
+        if ((to != '') & (!check.includes(to))){
+            check+=[to]
+        }
+        else if (to != ''){
+            alert("存在多对一！")
+            return
+        }
+    }
+    var text = $("#count_input").val();
+    var result = "";
+    for (i=0; i<text.length; i++){
+        chr = text[i];
+        result = result + (($(`#${chr}`).val() == '') ? text[i] : $(`#${text[i]}`).val());
+    }
+    $(".result").html(result);
+}
