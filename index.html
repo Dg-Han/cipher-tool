@@ -2,18 +2,23 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="author" content="Dg_Han">
+        <meta name="keywords" content="cipher, tool">
+        <title>简易密码工具箱</title>
         <link rel="stylesheet" type="text/css" href="./style/style.css">
 
         <script src="https://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
         <script type="text/javascript" src="./script/calc.js"></script>
         <script type="text/javascript" src="./script/count.js"></script>
+        <script type="text/javascript" src="./script/monoalp.js"></script>
         <script type="text/javascript" src="./script/ui.js"></script>
         <script type="text/javascript" src="./script/hotkey.js"></script>
     </head>
     <body>
         <div class="navi">
             <div class="navi-item" onclick="show_calc()">单词分数计算</div>
-            <div class="navi-item" onclick="show_count()">单表字频统计</div>
+            <div class="navi-item" onclick="show_count()">单表统计替换</div>
+            <div class="navi-item" onclick="show_monoalp()">常用单表密码</div>
         </div>
         <div id="calc" class="content" style="display:none">
             <h1>单词分数计算器</h1>
@@ -27,14 +32,33 @@
             <p class="result"></p>
         </div>
         <div id="count" class="content" style="display:none">
-            <h1>单表字频统计</h1>
+            <h1>单表字频统计 & 单表替换</h1>
             <div align="center">
                 <div style="width:100%"><input id="count_input" type="text" style="width:50%;height:300px"></div>
                 <label><input name="ign_cap" type="checkbox">仅统计英文且忽略大小写</label>
                 <label><input name="twochar" type="checkbox">统计双字母组合</label>
                 <button type="button" onclick="count()">统计</button>
             </div>
-            <p class="result"></p>
+            <div class="result" style="padding-top: 50px;"></div>
+            <div class="subst" style="padding-top: 50px;"></div>
+        </div>
+        <div id="monoalp" class="content" style="display:none">
+            <h1>单表密码集合</h1>
+            <div>
+                <label><input type="radio" name="mono_type" value="caesar" onclick="clear_monoalp()">凯撒密码</label>
+                <label><input type="radio" name="mono_type" value="vigenere" onclick="clear_monoalp()">维吉利亚密码</label>
+                <label>密钥<input type="text" id="vigenere_key"></label>
+                <div style="padding-top:25px">
+                    <label for="monoalp_input" style="margin-left:20%; margin-right:20%">密文/原始文本</label>
+                    <textarea id="monoalp_input" rows="20" cols="100"></textarea>
+                </div>
+                <button type="button" value="de" onclick="monoalp(this.value)">解密</button>
+                <button type="button" value="en" onclick="monoalp(this.value)">加密</button>
+                <div style="padding-top:25px">
+                    <label for="monoalp_output" style="margin-left:20%; margin-right:20%">明文/加密结果</label>
+                    <textarea id="monoalp_output" rows="20" cols="100" ></textarea>
+                </div>
+            </div>
         </div>
     </body>
 </html>
