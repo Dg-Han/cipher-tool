@@ -1,30 +1,47 @@
 /* this js file relys on jquery */
 
 function count(){
-    var text=$("#count_input").val();
-    var f={};
-    if ($("input[type=checkbox][name=ign_cap]")[0].checked){
-        for (let i=0; i<text.length; i++){
-            if ((/[a-zA-Z]/).test(text[i])){
+    var text = $("#count_input").val();
+    var f = {};
+    for (let i=0; i<text.length; i++){
+        if ((/[a-zA-Z]/).test(text[i])){
+            if ($("input[type=checkbox][name=ign_cap]")[0].checked){
                 f[text[i].toLowerCase()] = (text[i].toLowerCase() in f) ? f[text[i].toLowerCase()]+1 : 1;
             }
-        }
-    }
-    else{
-        let i=0;
-        while (i<text.length){
-            f[text[i]] = (text[i] in f) ? f[text[i]]+1 : 1;
-            i+=1;
-        }
-    }
-    if ($("input[type=checkbox][name=twochar]")[0].checked){
-        for (let i=0; i<text.length-1; i++){
-            if ((/[a-zA-Z]{2}/).test(text.toLowerCase().slice(i,i+2))){
-                f[text.toLowerCase().slice(i,i+2)] = (text.toLowerCase().slice(i,i+2) in f) ? f[text.toLowerCase().slice(i,i+2)]+1 : 1;
+            else{
+                f[text[i]] = (text[i] in f) ? f[text[i]]+1 : 1;
             }
         }
     }
-    var h=JSON.stringify(f);
+    var h = count_sorted_output(f);
+
+    if ($("input[type=checkbox][name=twochar]")[0].checked){
+        var f2 = {};
+        for (let i=0; i<text.length-1; i++){
+            s2 = text.toLowerCase().slice(i,i+2);
+            if ((/[a-zA-Z]{2}/).test(s2)){
+                f2[s2] = (s2 in f2) ? f2[s2]+1 : 1;
+            }
+        }
+    }
+    var h2 = (f2 != undefined) ? "<br>" + count_sorted_output(f2): "";
+
+    $(".result").html(h + h2);
+}
+
+function count_sorted_output(f){
+    const sorted_val = Object.values(f).sort((a,b) => {return b-a;})
+    var r = {}
+    const keys = Object.keys(f)
+    for (val in sorted_val){
+        keys.forEach((item) => {
+            if (sorted_val[val] === f[item]){
+                r[item] = sorted_val[val];
+            }
+        })
+    }
+
+    var h=JSON.stringify(r);
     let i=0; j=0; k=0;
     while (i<h.length){
         if (h[i]==","){
@@ -36,7 +53,7 @@ function count(){
         }
         i+=1;
     }
-    $(".result").html(h);
+    return h
 }
 
 function subst(){
@@ -55,8 +72,9 @@ function subst(){
     var text = $("#count_input").val();
     var result = "";
     for (i=0; i<text.length; i++){
-        chr = text[i];
-        result = result + (($(`#${chr}`).val() == '') ? text[i] : $(`#${text[i]}`).val());
+        upper = /[A-Z]/.test(text[i]);
+        chr = text[i].toLowerCase();
+        result = result + (((!/[a-z]/.test(chr)) || ($(`#${chr}`).val() == '')) ? text[i] : (upper ? $(`#${chr}`).val().toUppercase() : $(`#${chr}`).val()));
     }
     $(".result").html(result);
 }
