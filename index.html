@@ -22,7 +22,7 @@
         </div>
         <div id="calc" class="content" style="display:none">
             <h1>单词分数计算器</h1>
-            <p style="color:grey;font-size:smaller">Scarmble分数为Wordle字母分数<br>
+            <p class="note">Scarmble分数为Wordle字母分数<br>
                 字母序数分数为字母序数和(a=1)
             </p>
             <div align="center" style="margin:width-25px">
@@ -33,9 +33,10 @@
         </div>
         <div id="count" class="content" style="display:none">
             <h1>单表字频统计 & 单表替换</h1>
+            <p class="note">按Enter快捷键进行统计, Ctrl+Enter组合键进行换行</p>
             <div align="center">
-                <div style="width:100%"><input id="count_input" type="text" style="width:50%;height:300px"></div>
-                <label><input name="ign_cap" type="checkbox">仅统计英文且忽略大小写</label>
+                <div style="width:100%"><textarea id="count_input" type="text" style="width:50%;height:300px;resize:none"></textarea></div>
+                <label><input name="ign_cap" type="checkbox" checked="checked">仅统计英文且忽略大小写</label>
                 <label><input name="twochar" type="checkbox">统计双字母组合</label>
                 <button type="button" onclick="count()">统计</button>
             </div>
@@ -45,20 +46,46 @@
         <div id="monoalp" class="content" style="display:none">
             <h1>单表密码集合</h1>
             <div>
-                <label><input type="radio" name="mono_type" value="caesar" onclick="clear_monoalp()">凯撒密码</label>
-                <label><input type="radio" name="mono_type" value="vigenere" onclick="clear_monoalp()">维吉利亚密码</label>
+                <label title="明文中所有字母都向前或向后移动固定若干位&#10;例如：a-d, b-e, ..., x-a, y-b, z-c">
+                    <input type="radio" name="mono_type" value="caesar" onclick="clear_monoalp()">凯撒密码
+                </label>
+                <label title="明文中字母随位置的不同，根据密钥进行不同距离的移动&#10;例如：密文：world, 密钥：hello&#10;那么w + 7(h) = d, o + 4(e) = s, ...">
+                    <input type="radio" name="mono_type" value="vigenere" onclick="clear_monoalp()">维吉利亚密码
+                </label>
+                <label title="又称键盘替换，即按照电脑键盘从上到下，从左到右的顺序依次替换成字母表顺序&#10;例如：q-a, w-b, e-c, ..., n-y, m-z">
+                    <input type="radio" name="mono_type" value="qwerty" onclick="clear_monoalp()">qwerty替换
+                </label>
+                <label title="字母表倒序替换&#10;即a-z, b-y, c-x, ..., z-a">
+                    <input type="radio" name="mono_type" value="atbash" onclick="clear_monoalp()">Atbash替换
+                </label>
                 <label>密钥<input type="text" id="vigenere_key"></label>
                 <div style="padding-top:25px">
                     <label for="monoalp_input" style="margin-left:20%; margin-right:20%">密文/原始文本</label>
-                    <textarea id="monoalp_input" rows="20" cols="100"></textarea>
+                    <textarea id="monoalp_input" rows="20" cols="100" style="resize:none"></textarea>
                 </div>
                 <button type="button" value="de" onclick="monoalp(this.value)">解密</button>
                 <button type="button" value="en" onclick="monoalp(this.value)">加密</button>
                 <div style="padding-top:25px">
                     <label for="monoalp_output" style="margin-left:20%; margin-right:20%">明文/加密结果</label>
-                    <textarea id="monoalp_output" rows="20" cols="100" ></textarea>
+                    <textarea id="monoalp_output" rows="20" cols="100" style="resize:none"></textarea>
                 </div>
             </div>
+        </div>
+        <div class="footer">
+            <span class="left">
+                <p class="note">
+                    <span style="color:forestgreen">cipher tool</span>
+                     by 
+                    <span style="color:blueviolet">Dg_Han</span>,
+                    2022-2023
+                </p>
+            </span>
+            <span>
+                <p class="note">Last Update Time: Jan 16th, 2023</p>
+            </span>
+            <span class="right">
+                <p><a href="https://dg-han.github.io" style="color:royalblue">Github主站</a></p>
+            </span>
         </div>
     </body>
 </html>
