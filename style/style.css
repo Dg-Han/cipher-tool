@@ -4,6 +4,10 @@ h1,p,div{
 textarea{
     resize:none;
 }
+input[type="checkbox"]{
+    border-radius: 50%;
+    border: 1px solid;
+}
 .note{
     color: grey;
     font-size: smaller;
@@ -52,8 +56,39 @@ textarea{
     width:75%;
     margin-right:5%;
     float:right;
+    padding-bottom: 25px;
 }
     .seventh{
         width:13%;
         float:left;
     }
+
+input[name^="braille"]{
+    width:25px;
+    height:25px;
+}
+
+.flag{
+    width: 0;
+    height: 0;
+    margin: 20px;
+    display: inline-block;
+}
+
+#braille_img{
+    width: 600px;
+    height: 500px;
+}
+
+#semaphore_img{
+    width: 600px;
+    height: 360px;
+}
+
+.two_cols{
+    display: inline-block;
+    position: relative;
+    width: 45%;
+    margin-left: 1%;
+    margin-right: 1%;
+}

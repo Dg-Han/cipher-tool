@@ -13,12 +13,18 @@
         <script type="text/javascript" src="./script/monoalp.js"></script>
         <script type="text/javascript" src="./script/ui.js"></script>
         <script type="text/javascript" src="./script/hotkey.js"></script>
+        <script type="text/javascript" src="./script/others.js"></script>
+        <script type="text/javascript" src="./script/morse.js"></script>
+        <script type="text/javascript" src="./script/dna.js"></script>
     </head>
     <body>
         <div class="navi">
-            <div class="navi-item" onclick="show_calc()">单词分数计算</div>
-            <div class="navi-item" onclick="show_count()">单表统计替换</div>
-            <div class="navi-item" onclick="show_monoalp()">常用单表密码</div>
+            <div class="navi-item" onclick="show_item('calc')">单词分数计算</div>
+            <div class="navi-item" onclick="show_item('count')">单表统计替换</div>
+            <div class="navi-item" onclick="show_item('monoalp')">常用单表密码</div>
+            <div class="navi-item" onclick="show_item('others')">盲文旗语查询</div>
+            <div class="navi-item" onclick="show_item('morse')">摩斯电码转换</div>
+            <div class="navi-item" onclick="show_item('codon')">密码子提取</div>
         </div>
         <div id="calc" class="content" style="display:none">
             <h1>单词分数计算器</h1>
@@ -71,17 +77,86 @@
                 </div>
             </div>
         </div>
+        <div id="others" class="content" style="display:none">
+            <h1>盲文旗语查询</h1>
+            <div>
+                <div class="two_cols">
+                    <h2 id="braille_title" onmouseover="item_hover_img('braille', '500px')" onmouseout="item_hover_img('braille', '-100000px')">盲文查询</h2>
+                    <img id="braille_img" src="./data/braille.jpeg" alt="braille.png" style="position:absolute; left:-10000px; top:25px; z-index: 1;">
+                    <div>
+                        <input type="radio" name="braille_1" value="1" onclick="braille_set(this.value)">
+                        <input type="radio" name="braille_4" value="4" onclick="braille_set(this.value)">
+                    </div>
+                    <div>
+                        <input type="radio" name="braille_2" value="2" onclick="braille_set(this.value)">
+                        <input type="radio" name="braille_5" value="5" onclick="braille_set(this.value)">
+                    </div>
+                    <div>
+                        <input type="radio" name="braille_3" value="3" onclick="braille_set(this.value)">
+                        <input type="radio" name="braille_6" value="6" onclick="braille_set(this.value)">
+                    </div>
+                    <p id="braille_result"></p>
+                    <button type="button" onclick="braille_record()">记录</button>
+                </div>
+                <div class="two_cols">
+                    <h2 id="flag_title" onmouseover="item_hover_img('semaphore', '-500px')" onmouseout="item_hover_img('semaphore', '-100000px')">旗语查询</h2>
+                    <img id="semaphore_img" src="./data/semaphore.jpg" alt="semaphore.jpg" style="position:absolute; left:-10000px; top:25px;">
+                    <span class="flag" name="flag_nw" style="border:20px solid lightgray;border-right:20px solid transparent;border-bottom:20px solid transparent" onclick="flag_set('nw')"></span>
+                    <span class="flag" name="flag_n" style="border-bottom:50px solid lightgray;border-left:20px solid transparent;border-right:20px solid transparent" onclick="flag_set('n')"></span>
+                    <span class="flag" name="flag_ne" style="border:20px solid lightgray;border-left:20px solid transparent;border-bottom:20px solid transparent" onclick="flag_set('ne')"></span>
+                    <div></div>
+                    <span class="flag" name="flag_w" style="border-right:50px solid lightgray; border-top:20px solid transparent; border-bottom:20px solid transparent" onclick="flag_set('w')"></span>
+                    <span style="padding:50px"></span>
+                    <span class="flag" name="flag_e" style="border-left:50px solid lightgray; border-top:20px solid transparent; border-bottom:20px solid transparent" onclick="flag_set('e')"></span>
+                    <div></div>
+                    <span class="flag" name="flag_sw" style="border:20px solid lightgray;border-right:20px solid transparent;border-top:20px solid transparent" onclick="flag_set('sw')"></span>
+                    <span class="flag" name="flag_s" style="border-top:50px solid lightgray;border-left:20px solid transparent;border-right:20px solid transparent" onclick="flag_set('s')"></span>
+                    <span class="flag" name="flag_se"style="border:20px solid lightgray;border-left:20px solid transparent;border-top:20px solid transparent;" onclick="flag_set('se')"></span>
+                    <p id="semaphore_result"></p>
+                </div>
+            </div>
+            <button type="button" onclick="braille_clear()">清除</button>
+            <p class="result"></p>
+        </div>
+        <div id="morse" class="content" style="display:none">
+            <h1>摩斯电码转换</h1>
+            <div>
+                <textarea id="morse_input" rows="20" cols="100" style="resize:none"></textarea>
+                <div>
+                    <button type="button" onclick="morse()">转换&统计</button>
+                    <p class="result"></p>
+                </div>
+            </div>
+        </div>
+        <div id="codon" class="content" style="display:none">
+            <h1>密码子提取&转换</h1>
+            <div>
+                <div>
+                    <label title="使用ACGU">
+                        <input type="radio" name="codon_type" value="codon">密码子
+                    </label>
+                    <label title="使用ACGT">
+                        <input type="radio" name="codon_type" value="dna_code">DNA编码
+                    </label>
+                </div>
+                <textarea id="codon_input" rows="20" cols="100" style="resize:none;"></textarea>
+                <div>
+                    <button type="button" onclick="codon()">提取</button>
+                    <p class="result"></p>
+                </div>
+            </div>
+        </div>
         <div class="footer">
             <span class="left">
                 <p class="note">
                     <span style="color:forestgreen">cipher tool</span>
                      by 
                     <span style="color:blueviolet">Dg_Han</span>,
-                    2022-2023
+                    2022-2024
                 </p>
             </span>
             <span>
-                <p class="note">Last Update Time: Jan 16th, 2023</p>
+                <p class="note">Last Update Time: Jan 4th, 2024</p>
             </span>
             <span class="right">
                 <p><a href="https://dg-han.github.io" style="color:royalblue">Github主站</a></p>
