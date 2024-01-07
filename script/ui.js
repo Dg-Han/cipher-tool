@@ -1,40 +1,37 @@
 /* this js file relys on jquery */
 
-function show_calc(){
-    if ($("#calc").is(':hidden')){
-        window.removeEventListener("keydown",count_hotkey);
-        window.addEventListener("keydown",calc_hotkey);
+function show_item(item_name){
+    if ($(`#${item_name}`).is(":hidden")){
         $(".result").html("");
-        $("#count").hide();
-        $("#monoalp").hide();
-        $("#calc").show();
-    }
-}
+        $(".content").hide();
+        $(`#${item_name}`).show();
 
-function show_count(){
-    if ($("#count").is(':hidden')){
-        window.removeEventListener("keydown",calc_hotkey);
-        window.addEventListener("keydown",count_hotkey);
-        create_subst();
-        $(".result").html("");
-        $("#calc").hide();
-        $("#monoalp").hide();
-        $("#count").show();
-    }
-}
-
-function show_monoalp(){
-    if ($("#monoalp").is(':hidden')){
-        window.removeEventListener("keydown",count_hotkey);
-        window.removeEventListener("keydown",calc_hotkey);
-        mono_pre="";
-        $(".result").html("");
-        $("input[type=text]").val("");
-        $("textarea").val("");
-        $("input[name=mono_type]").removeAttr("checked");
-        $("#calc").hide();
-        $("#count").hide();
-        $("#monoalp").show();
+        if (item_name == "calc"){
+            window.removeEventListener("keydown",count_hotkey);
+            window.addEventListener("keydown",calc_hotkey);
+        }
+        if (item_name == "count"){
+            window.removeEventListener("keydown",calc_hotkey);
+            window.addEventListener("keydown",count_hotkey);
+            create_subst();
+        }
+        if (item_name == "monoalp"){
+            window.removeEventListener("keydown",count_hotkey);
+            window.removeEventListener("keydown",calc_hotkey);
+            mono_pre="";
+            $("input[type=text]").val("");
+            $("textarea").val("");
+            $("input[name=mono_type]").removeAttr("checked");
+        }
+        if (item_name == "others"){
+            window.removeEventListener("keydown",count_hotkey);
+            window.removeEventListener("keydown",calc_hotkey);
+            $("input[name^=braille]").removeAttr("checked");
+            let cache = JSON.parse(JSON.stringify(flag_checked));
+            cache.forEach(function(val,key,iterable){alert(val); flag_set(flag_index_list[val-1])});
+            $("[id$=result]").html("");
+            $(".result").html("");
+        }
     }
 }
 
@@ -55,4 +52,8 @@ function create_subst(){
     }
     cache = $(".subst").html();
     $(".subst").html(`${cache}<div style=\"width:28%\"></div><button type=\"button\" onclick=subst()>替换</button>`)
+}
+
+function item_hover_img(item_name, relative_x){
+    $(`#${item_name}_img`).css("left", relative_x);
 }

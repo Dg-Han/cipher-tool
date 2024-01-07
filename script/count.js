@@ -74,7 +74,7 @@ function subst(){
     for (i=0; i<text.length; i++){
         upper = /[A-Z]/.test(text[i]);
         chr = text[i].toLowerCase();
-        result = result + (((!/[a-z]/.test(chr)) || ($(`#${chr}`).val() == '')) ? text[i] : (upper ? $(`#${chr}`).val().toUppercase() : $(`#${chr}`).val()));
+        result = result + (((!/[a-z]/.test(chr)) || ($(`#${chr}`).val() == '')) ? text[i] : (upper ? $(`#${chr}`).val().toUpperCase() : $(`#${chr}`).val()));
     }
     $(".result").html(result);
 }

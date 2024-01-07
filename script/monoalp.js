@@ -15,6 +15,12 @@ function monoalp(way){
         var key = $("#vigenere_key").val().toLowerCase();
         vigenere(str, key, way);
     }
+    else if (mode=="qwerty"){
+        qwerty(str.toLowerCase(), way);
+    }
+    else if (mode=="atbash"){
+        atbash(str.toLowerCase(), way);
+    }
 }
 
 function caesar(str, way){
@@ -49,5 +55,27 @@ function vigenere(str, key, way){
         //alert(str[i]+" "+key[j%key.length]);
     }
     
+    $("#monoalp_output").val(`${res}`);
+}
+
+function qwerty(str, way){
+    var res = "";
+    var de_dict = {"q":"a", "w":"b", "e":"c", "r":"d", "t":"e", "y":"f", "u":"g", "i":"h", "o":"i", "p":"j",
+                   "a":"k", "s":"l", "d":"m", "f":"n", "g":"o", "h":"p", "j":"q", "k":"r", "l":"s",
+                   "z":"t", "x":"u", "c":"v", "v":"w", "b":"x", "n":"y", "m":"z"};
+    var en_dict = {"a":"q", "b":"w", "c":"e", "d":"r", "e":"t", "f":"y", "g":"u", "h":"i", "i":"o", "j":"p",
+                   "k":"a", "l":"s", "m":"d", "n":"f", "o":"g", "p":"h", "q":"j", "r":"k", "s":"l",
+                   "t":"z", "u":"x", "v":"c", "w":"v", "x":"b", "y":"n", "z":"m"};
+    for (i=0; i<str.length; i++){
+        res += way == "de" ? de_dict[str[i]] : en_dict[str[i]];
+    }
+    $("#monoalp_output").val(`${res}`);
+}
+
+function atbash(str, way){
+    var res = "";
+    for (i=0; i<str.length; i++){
+        res += String.fromCharCode(97+122-str[i].charCodeAt());
+    }
     $("#monoalp_output").val(`${res}`);
 }
