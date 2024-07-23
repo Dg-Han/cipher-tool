@@ -16,6 +16,7 @@
         <script type="text/javascript" src="./script/others.js"></script>
         <script type="text/javascript" src="./script/morse.js"></script>
         <script type="text/javascript" src="./script/dna.js"></script>
+        <script type="text/javascript" src="./script/fence.js"></script>
     </head>
     <body>
         <div class="navi">
@@ -25,6 +26,7 @@
             <div class="navi-item" onclick="show_item('others')">盲文旗语查询</div>
             <div class="navi-item" onclick="show_item('morse')">摩斯电码转换</div>
             <div class="navi-item" onclick="show_item('codon')">密码子提取</div>
+            <div class="navi-item" onclick="show_item('fence')">栅栏转换</div>
         </div>
         <div id="calc" class="content" style="display:none">
             <h1>单词分数计算器</h1>
@@ -124,6 +126,7 @@
                 <textarea id="morse_input" rows="20" cols="100" style="resize:none"></textarea>
                 <div>
                     <button type="button" onclick="morse()">转换&统计</button>
+                    <button type="button" onclick="demorse()">解码</button>
                     <p class="result"></p>
                 </div>
             </div>
@@ -146,6 +149,24 @@
                 </div>
             </div>
         </div>
+        <div id="fence" class="content" style="display:none">
+            <h1>栅栏转换</h1>
+            <div>
+                <label>请输入栏数<input type="text" id="fence_n"></label>
+                <div>
+                    <label>原始文本</label>
+                    <textarea id="fence_input" rows="20" cols="100" style="resize:none"></textarea>
+                </div>
+                <div>
+                    <button type="button" onclick="defence(-1)">解密</button>
+                    <button type="button" onclick="fence()">加密</button>
+                </div>
+                <div>
+                    <label>解密/加密文本</label>
+                    <textarea id="fence_output" rows="20" cols="100" style="resize:none"></textarea>
+                </div>
+            </div>
+        </div>
         <div class="footer">
             <span class="left">
                 <p class="note">
@@ -156,7 +177,7 @@
                 </p>
             </span>
             <span>
-                <p class="note">Last Update Time: Jan 4th, 2024</p>
+                <p class="note">Last Update Time: July 23rd, 2024</p>
             </span>
             <span class="right">
                 <p><a href="https://dg-han.github.io" style="color:royalblue">Github主站</a></p>
