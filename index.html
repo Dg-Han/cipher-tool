@@ -8,10 +8,10 @@
         <link rel="stylesheet" type="text/css" href="./style/style.css">
 
         <script src="https://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="./script/ui.js"></script>
         <script type="text/javascript" src="./script/calc.js"></script>
         <script type="text/javascript" src="./script/count.js"></script>
         <script type="text/javascript" src="./script/monoalp.js"></script>
-        <script type="text/javascript" src="./script/ui.js"></script>
         <script type="text/javascript" src="./script/hotkey.js"></script>
         <script type="text/javascript" src="./script/others.js"></script>
         <script type="text/javascript" src="./script/morse.js"></script>
@@ -68,13 +68,13 @@
                 </label>
                 <label>密钥<input type="text" id="vigenere_key"></label>
                 <div style="padding-top:25px">
-                    <label for="monoalp_input" style="margin-left:20%; margin-right:20%">密文/原始文本</label>
+                    <label for="monoalp_input" style="margin-left:45%; margin-right:45%">密文/原始文本</label>
                     <textarea id="monoalp_input" rows="20" cols="100" style="resize:none"></textarea>
                 </div>
                 <button type="button" value="de" onclick="monoalp(this.value)">解密</button>
                 <button type="button" value="en" onclick="monoalp(this.value)">加密</button>
                 <div style="padding-top:25px">
-                    <label for="monoalp_output" style="margin-left:20%; margin-right:20%">明文/加密结果</label>
+                    <label for="monoalp_output" style="margin-left:45%; margin-right:45%">明文/加密结果</label>
                     <textarea id="monoalp_output" rows="20" cols="100" style="resize:none"></textarea>
                 </div>
             </div>
@@ -153,16 +153,16 @@
             <h1>栅栏转换</h1>
             <div>
                 <label>请输入栏数<input type="text" id="fence_n"></label>
-                <div>
-                    <label>原始文本</label>
+                <div style="padding-top: 25px;">
+                    <div>原始文本</div>
                     <textarea id="fence_input" rows="20" cols="100" style="resize:none"></textarea>
                 </div>
                 <div>
                     <button type="button" onclick="defence(-1)">解密</button>
                     <button type="button" onclick="fence()">加密</button>
                 </div>
-                <div>
-                    <label>解密/加密文本</label>
+                <div style="padding-top: 50px;">
+                    <div>解密/加密文本</div>
                     <textarea id="fence_output" rows="20" cols="100" style="resize:none"></textarea>
                 </div>
             </div>
@@ -177,11 +177,14 @@
                 </p>
             </span>
             <span>
-                <p class="note">Last Update Time: July 23rd, 2024</p>
+                <p class="note">Last Update Time: Aug 17th, 2024</p>
             </span>
             <span class="right">
-                <p><a href="https://dg-han.github.io" style="color:royalblue">Github主站</a></p>
+                <a id="theme_mode" href="javascript:change_mode()">切换浅色模式</a>
+                <span class="hline"></span>
+                <a href="https://dg-han.github.io">Github主站</a>
             </span>
         </div>
+        <script type="text/javascript" src="./script/theme.js"></script>
     </body>
 </html>
