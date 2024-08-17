@@ -1,4 +1,7 @@
+/* this js file relys on jquery */
+
 var mono_pre="";
+var char_re = /[A-Za-z]/;
 
 function monoalp(way){
     $("#monoalp_output").val("");
@@ -26,9 +29,8 @@ function monoalp(way){
 function caesar(str, way){
     for (i=1; i<26; i++){
         res = "";
-        p = /[A-Za-z]/;
         for (j=0; j<str.length; j++){
-            res += p.test(str[j]) ? String.fromCharCode(97+(str[j].charCodeAt()-(way=="de" ? i : -i)-71)%26) : str[j];
+            res += char_re.test(str[j]) ? String.fromCharCode(97+(str[j].charCodeAt()-(way=="de" ? i : -i)-71)%26) : str[j];
         }
         cache = $("#monoalp_output").val();
         $("#monoalp_output").val(`${cache}${i}\: ${res}\n`);
@@ -67,7 +69,7 @@ function qwerty(str, way){
                    "k":"a", "l":"s", "m":"d", "n":"f", "o":"g", "p":"h", "q":"j", "r":"k", "s":"l",
                    "t":"z", "u":"x", "v":"c", "w":"v", "x":"b", "y":"n", "z":"m"};
     for (i=0; i<str.length; i++){
-        res += way == "de" ? de_dict[str[i]] : en_dict[str[i]];
+        res += char_re.test(str[i]) ? (way == "de" ? de_dict[str[i]] : en_dict[str[i]]) : str[i];
     }
     $("#monoalp_output").val(`${res}`);
 }
@@ -75,7 +77,7 @@ function qwerty(str, way){
 function atbash(str, way){
     var res = "";
     for (i=0; i<str.length; i++){
-        res += String.fromCharCode(97+122-str[i].charCodeAt());
+        res += char_re.test(str[i]) ? (String.fromCharCode(97+122-str[i].charCodeAt())) : str[i];
     }
     $("#monoalp_output").val(`${res}`);
 }

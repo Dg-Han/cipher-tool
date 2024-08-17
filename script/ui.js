@@ -28,7 +28,7 @@ function show_item(item_name){
             window.removeEventListener("keydown",calc_hotkey);
             $("input[name^=braille]").removeAttr("checked");
             let cache = JSON.parse(JSON.stringify(flag_checked));
-            cache.forEach(function(val,key,iterable){alert(val); flag_set(flag_index_list[val-1])});
+            cache.forEach(function(val,key,iterable){flag_set(flag_index_list[val-1])});
             $("[id$=result]").html("");
             $(".result").html("");
         }
